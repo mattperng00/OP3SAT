@@ -7,6 +7,7 @@
 
 #include <atmel_start.h>
 #include "receiver_tasks.h"
+#include "send_transmit.h"
 
 volatile uint8_t serial_receiving = 0;
 volatile uint8_t serial_complete = 0;
@@ -21,6 +22,12 @@ volatile uint8_t totalBytes = 0;
 //Receive and transmit buffers
 volatile uint8_t rx_buffer[SERIAL_BUFFER_SIZE] = {0x00};
 volatile uint8_t tx_buffer[SERIAL_BUFFER_SIZE + 20] = "Processing Command: ";
+
+QueueBuffer Qbuffer;
+
+#define CMD_SYNC_PATTERN 0xFE6B2840
+#define TOD_SYNC_PATTERN CMD_SYNC_PATTERN
+
 //Receive Callback function
 static void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 {
@@ -59,10 +66,22 @@ static void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 		//check for new line or return
 		if (ch == '\r' || ch == '\n')
 		{
-			//set flag
-			serial_complete =1;
 			//total bytes
 			totalBytes = byteCount - 2;
+			//reset flags
+			serial_receiving = 0;
+			serial_complete = 0;
+			
+			//copy message
+			memcpy(&tx_buffer[20], &rx_buffer[0], SERIAL_BUFFER_SIZE);
+			//copy into the Qbuffer
+			Qbuffer.buffer = rx_buffer;
+			xQueueSendFromISR(Q1, &Qbuffer, configMAX_PRIORITIES-1);
+			//print message
+			io_write(&SERIAL.io, tx_buffer, totalBytes + 22);
+			//clear memory
+			memset(&rx_buffer, 0x00, SERIAL_BUFFER_SIZE);
+			
 		}
 		//overflow check
 		if (byteCount >= SERIAL_BUFFER_SIZE)
@@ -73,52 +92,15 @@ static void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 	}
 }
 
-static uint8_t example_SERIAL[17] = "Command Processed";
 
 static void serial_tx_cb(const struct usart_async_descriptor *const io_descr)
 {
 	
 }
 
-
-void transmit(void)
-{
-	struct io_descriptor *io;
-
-	usart_async_register_callback(&SERIAL, USART_ASYNC_TXC_CB, serial_tx_cb);
-	/*usart_async_register_callback(&SERIAL, USART_ASYNC_RXC_CB, rx_cb);
-	usart_async_register_callback(&SERIAL, USART_ASYNC_ERROR_CB, err_cb);*/
-	usart_async_get_io_descriptor(&SERIAL, &io);
-	usart_async_enable(&SERIAL);
-
-	io_write(&SERIAL.io, example_SERIAL,17);
-}
-
-void receive_callback()
-{
-	if (serial_receiving == 1)
-	{
-		//check complete
-		if(serial_complete == 1)
-		{
-			//reset flags
-			serial_receiving = 0;
-			serial_complete = 0;
-			
-			//copy message
-			memcpy(&tx_buffer[20], &rx_buffer[0], SERIAL_BUFFER_SIZE);
-			//turn led message indicator on
-			//print message
-			io_write(&SERIAL.io, tx_buffer, totalBytes + 22);
-			//clear mem
-			memset(&rx_buffer, 0x00, SERIAL_BUFFER_SIZE);
-			
-			//xTaskCreate(process_command_task,(signed char*) "process_command_task",1024,NULL,1,NULL);
-		}
-	}
-}
 void async_setup(void)
 {
+	
 	usart_async_register_callback(&SERIAL, USART_ASYNC_TXC_CB, serial_tx_cb);
 	usart_async_register_callback(&SERIAL, USART_ASYNC_RXC_CB, serial_rx_cb);
 	usart_async_enable(&SERIAL);

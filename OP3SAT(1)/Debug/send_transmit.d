@@ -111,7 +111,8 @@ send_transmit.d send_transmit.o: .././send_transmit.c ../atmel_start.h \
  ../thirdparty/RTOS/hal_rtos.h ../hal/include/hpl_core.h \
  ../hpl/core/hpl_core_port.h \
  ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.h \
- ../qtouch/touch.h .././receiver_tasks.h
+ ../qtouch/touch.h .././receiver_tasks.h .././send_transmit.h \
+ .././rtos_start.h
 
 ../atmel_start.h:
 
@@ -422,3 +423,7 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\
 ../qtouch/touch.h:
 
 .././receiver_tasks.h:
+
+.././send_transmit.h:
+
+.././rtos_start.h:
