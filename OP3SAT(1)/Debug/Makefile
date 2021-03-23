@@ -132,7 +132,7 @@ C_SRCS +=  \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/list.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0/port.c \
-../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.c \
+../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/queue.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/stream_buffer.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/tasks.c \
@@ -197,7 +197,7 @@ thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/list.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0/port.o \
-thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.o \
+thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/queue.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/stream_buffer.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/tasks.o \
@@ -255,7 +255,7 @@ thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/list.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0/port.o \
-thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.o \
+thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/queue.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/stream_buffer.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/tasks.o \
@@ -313,7 +313,7 @@ thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/list.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0/port.d \
-thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.d \
+thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/queue.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/stream_buffer.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/tasks.d \
@@ -371,7 +371,7 @@ thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/list.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0/port.d \
-thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.d \
+thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/queue.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/stream_buffer.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/tasks.d \
@@ -750,7 +750,7 @@ thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0/port.o: ../
 	@echo Finished building: $<
 	
 
-thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.o: ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_1.c
+thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.o: ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/MemMang/heap_4.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20J18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/ac" -I"../hpl/adc" -I"../hpl/core" -I"../hpl/dac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pac" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"../thirdparty/RTOS" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/include" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/module_config" -I"../documentation" -I"../qtouch" -I"../qtouch/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

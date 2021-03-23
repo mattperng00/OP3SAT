@@ -5,8 +5,9 @@
 void sender1(void *pvParameters);
 void sender2(void *pvParameters);
 void receiver(void *pvParameters);
+volatile uint8_t help[4] = "help";
 
-QueueHandle_t q1;
+//QueueHandle_t q1;
 
 int main(void)
 {
@@ -17,17 +18,21 @@ int main(void)
 	// init asynchronous driver
 	async_setup();
 	
-	Q1 = xQueueCreate((UBaseType_t) 2, (UBaseType_t) sizeof(QueueBuffer));
+	//Q1 = xQueueCreate((UBaseType_t) 2, (UBaseType_t) sizeof(QueueBuffer));
 	
 	//xTaskCreate(sender1, "snd1", configMINIMAL_STACK_SIZE, (void *) q1, 1, NULL);
 	
 	//xTaskCreate(sender2, "snd2", configMINIMAL_STACK_SIZE, (void *) q1, 1, NULL);
 	
-	xTaskCreate(receiver, "rcv", configMINIMAL_STACK_SIZE, (void *) Q1, 2, NULL);
+	//xTaskCreate(receiver, "rcv", configMINIMAL_STACK_SIZE, Q1, 2, NULL);
 
 	
-	vTaskStartScheduler();
-	
+	//vTaskStartScheduler();
+	while(1)
+	{
+		//io_write(&SERIAL.io, help, 4);
+		//serial_rx_cb(&SERIAL.io);
+	};
 	
 }
 
@@ -59,7 +64,6 @@ void sender2(void *pvParameters)
 
 void receiver(void *pvParameters)
 {
-	volatile uint8_t help[4] = "help";
 	QueueBuffer anything;
 	QueueHandle_t input = (QueueHandle_t)pvParameters;
 	BaseType_t n;
@@ -76,16 +80,16 @@ void receiver(void *pvParameters)
 		
 		if (1) {
 			gpio_toggle_pin_level(BLINK);
-			delay_ms(750);
+			delay_ms(100);
 			gpio_toggle_pin_level(BLINK);
-			delay_ms(750);
+			delay_ms(100);
 			} else {
 			gpio_toggle_pin_level(BLINK);
-			delay_ms(250);
+			delay_ms(100);
 			gpio_toggle_pin_level(BLINK);
-			delay_ms(250);
+			delay_ms(100);
 			gpio_toggle_pin_level(BLINK);
-			delay_ms(750);
+			delay_ms(100);
 		}
 		
 	}

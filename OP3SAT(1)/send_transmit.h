@@ -13,6 +13,7 @@
 static void serial_tx_cb(const struct usart_async_descriptor *const io_descr); */
 void transmit(void);
 void receive_callback();
+void serial_rx_cb(const struct usart_async_descriptor *const io_descr);
 void async_setup(void);
 
 static QueueHandle_t Q1;

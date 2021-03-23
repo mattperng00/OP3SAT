@@ -104,7 +104,7 @@ thirdparty\RTOS\freertos\FreeRTOSV10.0.0\Source\list.c
 
 thirdparty\RTOS\freertos\FreeRTOSV10.0.0\Source\portable\GCC\ARM_CM0\port.c
 
-thirdparty\RTOS\freertos\FreeRTOSV10.0.0\Source\portable\MemMang\heap_1.c
+thirdparty\RTOS\freertos\FreeRTOSV10.0.0\Source\portable\MemMang\heap_4.c
 
 thirdparty\RTOS\freertos\FreeRTOSV10.0.0\Source\queue.c
 
