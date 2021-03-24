@@ -73,11 +73,13 @@ void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 			serial_receiving = 0;
 			serial_complete = 0;
 			
+			//BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 			//copy message
 			memcpy(&tx_buffer[20], &rx_buffer[0], SERIAL_BUFFER_SIZE);
 			//copy into the Qbuffer
-			Qbuffer.buffer = rx_buffer;
-			xQueueSendFromISR(Q1, &Qbuffer, configMAX_PRIORITIES-1);
+			//Qbuffer.buffer = rx_buffer;
+			xQueueSendFromISR(Q1, &tx_buffer[0], configMAX_PRIORITIES-1);
+			//xQueueSendToFrontFromISR(Q1,&Qbuffer,&xHigherPriorityTaskWoken);
 			//print message
 			io_write(&SERIAL.io, tx_buffer, totalBytes + 22);
 			//clear memory
@@ -91,7 +93,6 @@ void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 			byteCount = 0;
 		}
 	}
-	//xTaskResumeAll();
 }
 
 

@@ -16,7 +16,7 @@ void receive_callback();
 void serial_rx_cb(const struct usart_async_descriptor *const io_descr);
 void async_setup(void);
 
-static QueueHandle_t Q1;
+QueueHandle_t Q1;
 
 typedef struct QB {
 	uint8_t* buffer;
