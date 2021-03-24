@@ -6,28 +6,29 @@ void sender1(void *pvParameters);
 void sender2(void *pvParameters);
 void receiver(void *pvParameters);
 volatile uint8_t help[4] = "help";
+volatile uint8_t test[4] = "test";
 
-//QueueHandle_t q1;
+QueueHandle_t q1;
 
 int main(void)
 {
-	
+	NVIC_SetPriority(10,4);
 	/* Initializes MCU, drivers and middle ware */
 	atmel_start_init();
 	
 	// init asynchronous driver
 	async_setup();
 	
-	//Q1 = xQueueCreate((UBaseType_t) 2, (UBaseType_t) sizeof(QueueBuffer));
+	Q1 = xQueueCreate((UBaseType_t) 2, (UBaseType_t) sizeof(QueueBuffer));
 	
 	//xTaskCreate(sender1, "snd1", configMINIMAL_STACK_SIZE, (void *) q1, 1, NULL);
 	
 	//xTaskCreate(sender2, "snd2", configMINIMAL_STACK_SIZE, (void *) q1, 1, NULL);
 	
-	//xTaskCreate(receiver, "rcv", configMINIMAL_STACK_SIZE, Q1, 2, NULL);
+	xTaskCreate(receiver, "rcv", configMINIMAL_STACK_SIZE, Q1, 2, NULL);
 
 	
-	//vTaskStartScheduler();
+	vTaskStartScheduler();
 	while(1)
 	{
 		//io_write(&SERIAL.io, help, 4);
@@ -72,9 +73,9 @@ void receiver(void *pvParameters)
 	{
 		
 		if((n = xQueueReceive(input, &anything, 10)) == pdPASS) {
-			io_write(&SERIAL.io, help, 4);
-			//io_write(&SERIAL.io, anything.buffer, 4);
-
+			io_write(&SERIAL.io, test, 4);
+			io_write(&SERIAL.io, anything.buffer, 4);
+			
 		}
 		//gpio_set_pin_level()
 		

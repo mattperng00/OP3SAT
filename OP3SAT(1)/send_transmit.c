@@ -23,7 +23,7 @@ volatile uint8_t totalBytes = 0;
 volatile uint8_t rx_buffer[SERIAL_BUFFER_SIZE] = {0x00};
 volatile uint8_t tx_buffer[SERIAL_BUFFER_SIZE + 20] = "Processing Command: ";
 
-//QueueBuffer Qbuffer;
+QueueBuffer Qbuffer;
 
 #define CMD_SYNC_PATTERN 0xFE6B2840
 #define TOD_SYNC_PATTERN CMD_SYNC_PATTERN
@@ -76,8 +76,8 @@ void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 			//copy message
 			memcpy(&tx_buffer[20], &rx_buffer[0], SERIAL_BUFFER_SIZE);
 			//copy into the Qbuffer
-			//Qbuffer.buffer = rx_buffer;
-			//xQueueSendFromISR(Q1, &Qbuffer, configMAX_PRIORITIES-1);
+			Qbuffer.buffer = rx_buffer;
+			xQueueSendFromISR(Q1, &Qbuffer, configMAX_PRIORITIES-1);
 			//print message
 			io_write(&SERIAL.io, tx_buffer, totalBytes + 22);
 			//clear memory
@@ -106,4 +106,6 @@ void async_setup(void)
 	usart_async_register_callback(&SERIAL, USART_ASYNC_TXC_CB, serial_tx_cb);
 	usart_async_register_callback(&SERIAL, USART_ASYNC_RXC_CB, serial_rx_cb);
 	usart_async_enable(&SERIAL);
+	
+	
 }
