@@ -94,6 +94,8 @@ rtos_start.c
 
 send_transmit.c
 
+sppe.c
+
 thirdparty\RTOS\freertos\FreeRTOSV10.0.0\rtos_port.c
 
 thirdparty\RTOS\freertos\FreeRTOSV10.0.0\Source\croutine.c

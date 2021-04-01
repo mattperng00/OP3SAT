@@ -15,12 +15,8 @@ void transmit(void);
 void receive_callback();
 void serial_rx_cb(const struct usart_async_descriptor *const io_descr);
 void async_setup(void);
+void usart_receiver_task(void *pvParameters);
 
-QueueHandle_t Q1;
-
-typedef struct QB {
-	uint8_t* buffer;
-	UBaseType_t bufsize;
-} QueueBuffer;
+QueueHandle_t SPQ;
 
 #endif /* SEND_TRANSMIT_H_ */
