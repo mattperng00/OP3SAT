@@ -1023,6 +1023,12 @@
     <Compile Include="send_transmit.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="sppe.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sppe.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="thirdparty\RTOS\freertos\FreeRTOSV10.0.0\rtos_port.c">
       <SubType>compile</SubType>
     </Compile>

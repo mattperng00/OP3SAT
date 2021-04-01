@@ -8,6 +8,7 @@
 #include <atmel_start.h>
 #include "receiver_tasks.h"
 #include "send_transmit.h"
+#include "sppe.h"
 
 volatile uint8_t serial_receiving = 0;
 volatile uint8_t serial_complete = 0;
@@ -22,15 +23,17 @@ volatile uint8_t totalBytes = 0;
 //Receive and transmit buffers
 volatile uint8_t rx_buffer[SERIAL_BUFFER_SIZE] = {0x00};
 volatile uint8_t tx_buffer[SERIAL_BUFFER_SIZE + 20] = "Processing Command: ";
-
-QueueBuffer Qbuffer;
+volatile uint8_t command_buffer[SERIAL_BUFFER_SIZE] = {0x00};
 
 #define CMD_SYNC_PATTERN 0xFE6B2840
 #define TOD_SYNC_PATTERN CMD_SYNC_PATTERN
 
+
 //Receive Callback function
 void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 {
+	 //QueueBuffer queueBuff;
+	 SPPEvent event;
 	//vTaskSuspendAll();
 	//counters
 	uint8_t ch, count;
@@ -69,19 +72,26 @@ void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 		{
 			//total bytes
 			totalBytes = byteCount - 2;
+			
 			//reset flags
 			serial_receiving = 0;
 			serial_complete = 0;
 			
-			//BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 			//copy message
-			memcpy(&tx_buffer[20], &rx_buffer[0], SERIAL_BUFFER_SIZE);
-			//copy into the Qbuffer
-			//Qbuffer.buffer = rx_buffer;
-			xQueueSendFromISR(Q1, &tx_buffer[0], configMAX_PRIORITIES-1);
-			//xQueueSendToFrontFromISR(Q1,&Qbuffer,&xHigherPriorityTaskWoken);
+			memcpy(&tx_buffer[20], &rx_buffer[0], SERIAL_BUFFER_SIZE); //get rid of "Processing Command: " from buffer
+			memcpy(&command_buffer[0], &rx_buffer[0], SERIAL_BUFFER_SIZE); // can delete this later
+			
+			//stores command into struct
+			event.pvData = command_buffer;
+			event.eventType = eUSARTRxEvent;
+			
+			//stores type of command into struct
+			event.eventType = eSPPTxEvent;
+			xQueueSendFromISR(SPQ, &event, configMAX_PRIORITIES-1);
 			//print message
-			io_write(&SERIAL.io, tx_buffer, totalBytes + 22);
+			
+			//io_write(&SERIAL.io, &tx_buffer, totalBytes + 22);
+			
 			//clear memory
 			memset(&rx_buffer, 0x00, SERIAL_BUFFER_SIZE);
 			

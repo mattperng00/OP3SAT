@@ -111,7 +111,7 @@ main.d main.o: .././main.c ../atmel_start.h ../driver_init.h \
  ../thirdparty/RTOS/hal_rtos.h ../hal/include/hpl_core.h \
  ../hpl/core/hpl_core_port.h \
  ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.h \
- ../qtouch/touch.h .././send_transmit.h .././rtos_start.h \
+ ../qtouch/touch.h .././send_transmit.h .././rtos_start.h .././sppe.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -447,6 +447,8 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\
 .././send_transmit.h:
 
 .././rtos_start.h:
+
+.././sppe.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 

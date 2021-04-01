@@ -127,6 +127,7 @@ C_SRCS +=  \
 ../receiver_tasks.c \
 ../rtos_start.c \
 ../send_transmit.c \
+../sppe.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.c \
 ../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.c \
@@ -192,6 +193,7 @@ qtouch/touch.o \
 receiver_tasks.o \
 rtos_start.o \
 send_transmit.o \
+sppe.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.o \
@@ -250,6 +252,7 @@ qtouch/touch.o \
 receiver_tasks.o \
 rtos_start.o \
 send_transmit.o \
+sppe.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.o \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.o \
@@ -308,6 +311,7 @@ qtouch/touch.d \
 receiver_tasks.d \
 rtos_start.d \
 send_transmit.d \
+sppe.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.d \
@@ -366,6 +370,7 @@ qtouch/touch.d \
 receiver_tasks.d \
 rtos_start.d \
 send_transmit.d \
+sppe.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/rtos_port.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/croutine.d \
 thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/event_groups.d \
@@ -709,6 +714,13 @@ qtouch/touch.o: ../qtouch/touch.c
 	
 
 ./send_transmit.o: .././send_transmit.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20J18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/ac" -I"../hpl/adc" -I"../hpl/core" -I"../hpl/dac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pac" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"../thirdparty/RTOS" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/include" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/module_config" -I"../documentation" -I"../qtouch" -I"../qtouch/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./sppe.o: .././sppe.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20J18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/ac" -I"../hpl/adc" -I"../hpl/core" -I"../hpl/dac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pac" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"../thirdparty/RTOS" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/include" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/Source/portable/GCC/ARM_CM0" -I"../thirdparty/RTOS/freertos/FreeRTOSV10.0.0/module_config" -I"../documentation" -I"../qtouch" -I"../qtouch/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
