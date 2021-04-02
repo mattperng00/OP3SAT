@@ -19,6 +19,7 @@ int main(void)
 	async_setup();
 	
 	SPQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
+	//MRQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
 		
 	xTaskCreate(sppe_task, "sppe", configMINIMAL_STACK_SIZE, SPQ, 1, NULL);
 
