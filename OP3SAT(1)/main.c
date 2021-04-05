@@ -17,9 +17,6 @@ int main(void)
 	
 	// init asynchronous driver
 	async_setup();
-	
-	SPQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
-	//MRQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
 		
 	xTaskCreate(sppe_task, "sppe", configMINIMAL_STACK_SIZE, SPQ, 1, NULL);
 
@@ -29,4 +26,15 @@ int main(void)
 		//io_write(&SERIAL.io, help, 4);
 		//serial_rx_cb(&SERIAL.io);
 	};
+}
+
+void cdhs_init() {
+	/* Minimal Queues */
+	
+	SPQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
+	//MRQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
+	
+	/* Tasks */
+	
+	/* */
 }
