@@ -1,1 +1,11 @@
 Debug/
+
+*.d
+*.o
+*.elf
+*.map
+*.bin
+*.mk
+*.lss
+*.hex
+*.srec
