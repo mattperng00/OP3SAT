@@ -543,6 +543,12 @@
     <Compile Include="atmel_start_pins.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="buffer_pool.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="buffer_pool.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="crc_ccitt.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1033,6 +1039,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="send_transmit.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="spp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="spp.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="sppe.c">
