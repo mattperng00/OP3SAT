@@ -11,7 +11,7 @@
 
 #include <stdint.h>
 
-extern uint16_t compute_crc(uint16_t, uint8_t*, int);
+extern uint16_t compute_crc(uint8_t*, int);
 
 extern void crc_table_init();
 

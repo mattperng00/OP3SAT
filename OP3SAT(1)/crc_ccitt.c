@@ -13,7 +13,7 @@
 
 uint16_t crc_table[256];
 
-_compute_crc(uint16_t, uint8_t*, int);
+uint16_t _compute_crc(uint16_t, uint8_t*, int);
 
 
 uint16_t compute_crc(uint8_t* buffer, int len) {	
