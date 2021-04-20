@@ -7,9 +7,12 @@
 #include "sppe.h"
 #include "buffer_pool.h"
 
+void cdhs_init();
+
+
 int main(void)
 {
-	NVIC_SetPriority(10,1);
+	NVIC_SetPriority(10, 1);
 	/* Initializes MCU, drivers and middle ware */
 	atmel_start_init();
 	
@@ -24,7 +27,7 @@ int main(void)
 	{
 		//io_write(&SERIAL.io, help, 4);
 		//serial_rx_cb(&SERIAL.io);
-	};
+	}
 }
 
 void cdhs_init() {
@@ -37,8 +40,8 @@ void cdhs_init() {
 	/* Tasks */
 	xTaskCreate(sppe_task, "sppe", configMINIMAL_STACK_SIZE, SPQ, 1, NULL);
 	
-	
-	/* */
+	/* Other */
 	crc_table_init();
+	
 	//free_buffer_init(20, 128);
 }

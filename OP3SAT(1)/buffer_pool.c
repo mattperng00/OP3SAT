@@ -7,14 +7,17 @@
 
 #include "buffer_pool.h"
 
-int free_buffer_init(int buffers, int buf_size) {
+int free_buffer_init(int num_buffers, int buf_size) {
 	void* buf;
 	
-	while (buffers) {
+	while (num_buffers) {
 		if (!(buf = pvPortMalloc(buf_size))) {
-			return buffers;
+			break;
 		}
+		
 		xQueueSend(FBQ, buf, 0);
-		buffers--;
+		num_buffers--;
 	}
+	
+	return num_buffers;
 }

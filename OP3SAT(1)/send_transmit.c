@@ -24,15 +24,15 @@ volatile uint8_t totalBytes = 0;
 
 //Receive and transmit buffers
 volatile uint8_t rx_buffer[SERIAL_BUFFER_SIZE] = {0x00};
-volatile uint8_t tx_buffer[SERIAL_BUFFER_SIZE + 20] = "Processing Command: ";
-volatile uint8_t command_buffer[SERIAL_BUFFER_SIZE] = {0x00};
+volatile uint8_t tx_buffer[SERIAL_BUFFER_SIZE + 20] = {0x00};
+//volatile uint8_t command_buffer[SERIAL_BUFFER_SIZE] = {0x00};
 
+static SPPEvent Rxevent;
 
 //Receive Callback function
 void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 {
 	 //QueueBuffer queueBuff;
-	 SPPEvent Rxevent;
 	//vTaskSuspendAll();
 	//counters
 	uint8_t ch, count;
@@ -78,10 +78,10 @@ void serial_rx_cb(const struct usart_async_descriptor *const io_descr)
 			
 			//copy message
 			//memcpy(tx_buffer + 20, rx_buffer, SERIAL_BUFFER_SIZE); //get rid of "Processing Command: " from buffer
-			memcpy(command_buffer, rx_buffer, SERIAL_BUFFER_SIZE); // can delete this later
+			//memcpy(command_buffer, rx_buffer, SERIAL_BUFFER_SIZE); // can delete this later
 			
 			//stores command into struct
-			Rxevent.pvData = command_buffer;
+			Rxevent.pvData = rx_buffer;
 			Rxevent.eventType = eUSARTRxEvent;
 			
 			xQueueSendFromISR(SPQ, &Rxevent, configMAX_PRIORITIES-1);

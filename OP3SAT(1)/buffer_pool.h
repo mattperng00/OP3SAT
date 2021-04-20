@@ -13,7 +13,7 @@
 
 QueueHandle_t FBQ;
 
-int free_buffer_init(int buffers, int buf_size);
+int free_buffer_init(int num_buffers, int buf_size);
 
 
 #endif /* BUFFER_POOL_H_ */
