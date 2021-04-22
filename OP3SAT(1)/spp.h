@@ -19,6 +19,8 @@ uint16_t spp_packet_data_length(uint8_t* ptr);
 
 uint16_t spp_packet_length(uint8_t* ptr);
 
+uint8_t spp_packet_type(uint8_t* ptr);
+
 uint8_t* spp_packet_crc_start(uint8_t* ptr);
 
 uint16_t spp_packet_crc_check_range(uint8_t* ptr);

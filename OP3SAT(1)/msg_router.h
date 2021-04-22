@@ -12,12 +12,10 @@
 #include <atmel_start.h>
 #include <stdint.h>
 #include "spp.h"
+#include "sppe.h"
 
 void msg_router_task(void *pvParameters);
 
-QueueHandle_t MRQ;
-
-typedef struct {	void *pvData;			/* Holds or points to any data associated with the event. */} MsgEvent;
 
 
 #endif /* MSG_ROUTER_H_ */
