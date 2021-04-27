@@ -6,17 +6,21 @@
  */ 
 
 #include "msg_router.h"
+#include "buffer_pool.h"
+
+void msg_router_init();
+void route_command(void *data);
+
 
 void msg_router_init() {
 	
 }
 
-void msg_router_task(void *pvParameters) {	// declare struct	SPPEvent receivedEvent;	for (;;)	{		xQueueReceive(SPQ,&receivedEvent,portMAX_DELAY);		if(receivedEvent.pvData == 16)
-		{
-			//time of day process
+void msg_router_task(void *pvParameters) {		SPPEvent received_event;	void *msg = NULL;		for (;;) {		xQueueReceive(MRQ, &received_event, portMAX_DELAY);		
+		if (spp_packet_type((uint8_t*)received_event.pvData)) {
+			//route_command(received_event.pvData);
 		}
-		else
-		{
-			//parse command
+		else {
+			//xQueueSend(TDQ, receivedEvent.pvData, portMAX_DELAY);
 		}
-				}		vTaskDelete(NULL);}
+			}		vTaskDelete(NULL);}void route_command(void *data) {		// Check APID		// Check CMD type		// route}

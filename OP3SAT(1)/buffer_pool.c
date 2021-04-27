@@ -10,13 +10,12 @@
 int free_buffer_init(int num_buffers, int buf_size) {
 	void* buf;
 	
-	while (num_buffers) {
+	while (num_buffers--) {
 		if (!(buf = pvPortMalloc(buf_size))) {
 			break;
 		}
 		
 		xQueueSend(FBQ, buf, 0);
-		num_buffers--;
 	}
 	
 	return num_buffers;

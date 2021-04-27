@@ -38,7 +38,10 @@ void cdhs_init() {
 	//FBQ = xQueueCreate(20, (UBaseType_t) sizeof(void*));
 	
 	/* Tasks */
-	xTaskCreate(sppe_task, "sppe", configMINIMAL_STACK_SIZE, SPQ, 1, NULL);
+	xTaskCreate(sppe_task, "sppe", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	//xTaskCreate(msg_router_task, "msgr", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	//xTaskCreate(tod_processor_task, "todp", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	//xTaskCreate(tod_processor_task, "todp", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	
 	/* Other */
 	crc_table_init();

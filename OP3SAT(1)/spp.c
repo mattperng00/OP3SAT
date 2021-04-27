@@ -28,8 +28,7 @@ inline uint16_t spp_packet_length(uint8_t* ptr) {
 	return spp_packet_data_length(ptr) + HEADER_LEN + CRC_LEN; // Include header and CRC bytes
 }
 
-inline uint8_t spp_packet_type(uint8_t* ptr)
-{
+inline uint8_t spp_packet_type(uint8_t* ptr) {
 	return *(ptr+4) & 0b00010000; 
 }
 
@@ -42,14 +41,14 @@ inline uint16_t spp_packet_crc_check_range(uint8_t* ptr) {
 }
 
 inline uint16_t spp_packet_crc_compute_range(uint8_t* ptr) {
-	return spp_packet_length(ptr) - SYNC_LEN - CRC_LEN; // Exclude sync and (currently empty) crc bytes
+	return spp_packet_length(ptr) - SYNC_LEN - CRC_LEN; // Exclude sync and (currently empty) CRC bytes
 }
 
 uint8_t* find_message(uint8_t* ptr, int len) {
 
 	while (len--) {
 		if (*(uint32_t*)ptr == CMD_SYNC_PATTERN)
-		return ptr;
+			return ptr;
 		ptr++;
 	}
 

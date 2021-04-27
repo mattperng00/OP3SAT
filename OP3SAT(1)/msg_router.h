@@ -16,6 +16,7 @@
 
 void msg_router_task(void *pvParameters);
 
+QueueHandle_t MRQ;
 
 
 #endif /* MSG_ROUTER_H_ */

@@ -1023,12 +1023,6 @@
     <Compile Include="qtouch\touch.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="receiver_tasks.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="receiver_tasks.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="rtos_start.c">
       <SubType>compile</SubType>
     </Compile>
