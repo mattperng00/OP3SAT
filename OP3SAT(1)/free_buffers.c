@@ -5,7 +5,7 @@
  *  Author: anyis
  */ 
 
-#include "buffer_pool.h"
+#include "free_buffers.h"
 
 int free_buffer_init(int num_buffers, int buf_size) {
 	void* buf;
@@ -19,4 +19,8 @@ int free_buffer_init(int num_buffers, int buf_size) {
 	}
 	
 	return num_buffers;
+}
+
+void return_buffer(void* buffer) {
+	xQueueSend(FBQ, buffer, 0);
 }

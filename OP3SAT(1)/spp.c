@@ -15,7 +15,7 @@
 #define SYNC_LEN 4
 #define CRC_LEN 2
 
-/* Field extract */
+/* Header Field Extract */
 inline uint32_t spp_packet_sync_pattern(uint8_t* ptr) {
 	return *(uint32_t*)ptr;
 }
@@ -29,9 +29,19 @@ inline uint16_t spp_packet_length(uint8_t* ptr) {
 }
 
 inline uint8_t spp_packet_type(uint8_t* ptr) {
-	return *(ptr+4) & 0b00010000; 
+	return *(ptr + 4) & 0b00010000; 
 }
 
+/* Data Field Extract */
+inline uint32_t tai_seconds(uint8_t* ptr) {
+	return *(uint32_t*)(ptr + HEADER_LEN);
+}
+
+inline uint16_t tai_milliseconds(uint8_t* ptr) {
+	return *(uint16_t*)(ptr + HEADER_LEN + 4);
+}
+
+/* CRC Field Extract*/
 inline uint8_t* spp_packet_crc_start(uint8_t* ptr) {
 	return ptr + SYNC_LEN; // Start at byte past sync frame
 }
@@ -47,7 +57,7 @@ inline uint16_t spp_packet_crc_compute_range(uint8_t* ptr) {
 uint8_t* find_message(uint8_t* ptr, int len) {
 
 	while (len--) {
-		if (*(uint32_t*)ptr == CMD_SYNC_PATTERN)
+		if (spp_packet_sync_pattern(ptr) == CMD_SYNC_PATTERN)
 			return ptr;
 		ptr++;
 	}

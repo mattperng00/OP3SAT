@@ -5,6 +5,8 @@
  *  Author: anyis
  */ 
 
+#include "timeofday.h"
+
 static uint32_t tai_seconds;
 static uint16_t tai_milliseconds;
 //static uint32_t internal_clk;
@@ -18,10 +20,17 @@ uint16_t get_tai_milliseconds() {
 	return tai_milliseconds;
 }
 
+/*uint32_t get_internal_clk() {
+	return
+}
+*/
+
 void set_tai_time(uint32_t seconds, uint16_t milliseconds) {
 	
-	// disable interrupts
+	vTaskSuspendAll();
+	
 	tai_seconds = seconds;
 	tai_milliseconds = milliseconds;
-	// enable interrupts
+	
+	xTaskResumeAll();
 }

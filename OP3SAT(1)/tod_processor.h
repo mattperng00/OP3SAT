@@ -18,5 +18,4 @@
 void tod_processor_task(void *pvParameters);
 
 
-
 #endif /* TOD_PROCESSOR_H_ */

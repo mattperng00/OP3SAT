@@ -1,13 +1,13 @@
 /*
- * buffer_pool.h
+ * free_buffers.h
  *
  * Created: 4/13/2021 6:59:59 PM
  *  Author: anyis
  */ 
 
 
-#ifndef BUFFER_POOL_H_
-#define BUFFER_POOL_H_
+#ifndef FREE_BUFFERS_H_
+#define FREE_BUFFERS_H_
 
 #include <atmel_start.h>
 
@@ -15,5 +15,6 @@ QueueHandle_t FBQ;
 
 int free_buffer_init(int num_buffers, int buf_size);
 
+void return_buffer(void* buffer);
 
-#endif /* BUFFER_POOL_H_ */
+#endif /* FREE_BUFFERS_H_ */

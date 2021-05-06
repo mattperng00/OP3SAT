@@ -2,10 +2,9 @@
 #include <stdio.h>
 #include <atmel_start.h>
 
-#include "buffer_pool.h"
 #include "send_transmit.h"
 #include "sppe.h"
-#include "buffer_pool.h"
+#include "free_buffers.h"
 
 void cdhs_init();
 
@@ -32,19 +31,21 @@ int main(void)
 
 void cdhs_init() {
 	
-	/* Minimal Queues */
+	/* Queues */
 	SPQ = xQueueCreate(20, (UBaseType_t) sizeof(SPPEvent));
-	//MRQ = xQueueCreate((UBaseType_t) 20, (UBaseType_t) sizeof(SPPEvent));
+	//MRQ = xQueueCreate(20, (UBaseType_t) sizeof(SPPEvent));
 	//FBQ = xQueueCreate(20, (UBaseType_t) sizeof(void*));
+	//TDQ = xQueueCreate(2, (UBaseType_t) sizeof(void*));
 	
 	/* Tasks */
 	xTaskCreate(sppe_task, "sppe", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	//xTaskCreate(msg_router_task, "msgr", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	//xTaskCreate(tod_processor_task, "todp", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-	//xTaskCreate(tod_processor_task, "todp", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	//xTaskCreate(, "cmdu", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	//xTaskCreate(, "cmd1", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	
 	/* Other */
 	crc_table_init();
 	
-	//free_buffer_init(20, 128);
+	//free_buffer_init(20, 64);
 }

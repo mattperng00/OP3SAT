@@ -6,7 +6,7 @@
  */ 
 
 #include "msg_router.h"
-#include "buffer_pool.h"
+#include "free_buffers.h"
 
 void msg_router_init();
 void route_command(void *data);

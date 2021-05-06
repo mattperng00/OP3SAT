@@ -543,10 +543,10 @@
     <Compile Include="atmel_start_pins.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="buffer_pool.c">
+    <Compile Include="free_buffers.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="buffer_pool.h">
+    <Compile Include="free_buffers.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="crc_ccitt.c">
@@ -1132,6 +1132,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="thirdparty\RTOS\hal_rtos.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timeofday.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timeofday.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tod_processor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tod_processor.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
